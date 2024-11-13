@@ -1,0 +1,117 @@
+import React, { useState, useContext } from 'react';
+import { addStockItem, updateStockItem, deleteStockItem } from '../api';
+import { StockContext } from '../context/StockContext';
+
+function StockPage({ showMessage }) {
+  const { stockItems, setStockItems } = useContext(StockContext);
+  const [newItem, setNewItem] = useState({ name: '', quantity: '', unit: '' });
+
+  const handleAddItem = async () => {
+    if (stockItems.some(item => item.name === newItem.name)) {
+      showMessage('Item already exists.');
+      return;
+    }
+    try {
+      const addedItem = await addStockItem(newItem);
+      setStockItems([...stockItems, addedItem.data]);
+      setNewItem({ name: '', quantity: '', unit: '' });
+      showMessage('Stock item added successfully.');
+    } catch (error) {
+      showMessage('Failed to add stock item. Please try again.');
+    }
+  };
+
+  const handleChange = (index, field, value) => {
+    const updatedItems = stockItems.map((item, i) =>
+      i === index ? { ...item, [field]: value } : item
+    );
+    setStockItems(updatedItems);
+  };
+
+  const handleEditItem = async (index) => {
+    const item = stockItems[index];
+    if (item.isEditing) {
+      try {
+        await updateStockItem(item.id, { name: item.name, quantity: parseFloat(item.quantity), unit: item.unit });
+        item.isEditing = false;
+        setStockItems([...stockItems]);
+        showMessage('Stock item updated successfully.');
+      } catch (error) {
+        showMessage('Failed to update stock item. Please try again.');
+      }
+    } else {
+      item.isEditing = true;
+      setStockItems([...stockItems]);
+    }
+  };
+
+  const handleDeleteItem = async (itemId) => {
+    try {
+      await deleteStockItem(itemId);
+      setStockItems(stockItems.filter(item => item.id !== itemId));
+      showMessage('Stock item deleted successfully.');
+    } catch (error) {
+      showMessage('Failed to delete stock item. Please try again.');
+    }
+  };
+
+  return (
+    <div>
+      <h1>Stock Page</h1>
+      <input
+        placeholder="Name"
+        value={newItem.name}
+        onChange={(e) => setNewItem({ ...newItem, name: e.target.value })}
+      />
+      <input
+        placeholder="Quantity"
+        type="number"
+        value={newItem.quantity}
+        onChange={(e) => setNewItem({ ...newItem, quantity: e.target.value })}
+      />
+      <input
+        placeholder="Unit"
+        value={newItem.unit}
+        onChange={(e) => setNewItem({ ...newItem, unit: e.target.value })}
+      />
+      <button onClick={handleAddItem}>Add Item</button>
+      <table>
+        <thead>
+          <tr><th>Name</th><th>Quantity</th><th>Unit</th><th>Actions</th></tr>
+        </thead>
+        <tbody>
+          {stockItems.map((item, index) => (
+            <tr key={index}>
+              <td>
+                {item.isEditing ? (
+                  <input
+                    value={item.name}
+                    onChange={(e) => handleChange(index, 'name', e.target.value)}
+                  />
+                ) : item.name}
+              </td>
+              <td>
+                {item.isEditing ? (
+                  <input
+                    type="number"
+                    value={item.quantity}
+                    onChange={(e) => handleChange(index, 'quantity', e.target.value)}
+                  />
+                ) : item.quantity}
+              </td>
+              <td>{item.unit}</td>
+              <td>
+                <button onClick={() => handleEditItem(index)}>
+                  {item.isEditing ? 'Save' : 'Edit'}
+                </button>
+                <button onClick={() => handleDeleteItem(item.id)}>Delete</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+export default StockPage;

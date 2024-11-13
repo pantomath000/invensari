@@ -1,0 +1,16 @@
+from django.urls import path
+from . import views
+from .views import LoginUserView
+
+urlpatterns = [
+    path('login/', LoginUserView.as_view(), name='login'),
+    path('register/', views.register_user, name='register'),
+    path('profile/<int:user_id>/', views.profile, name='profile'),
+    path('profile/<int:user_id>/update/', views.update_profile, name='update_profile'),
+    path('dashboard/', views.dashboard, name='dashboard'),
+    path('stock/', views.stock_list_create, name='stock'),
+    path('stock/<int:item_id>/', views.stock_update_delete, name='stock_update_delete'),
+    path('products/', views.products_list_create, name='products'),
+    path('products/<int:product_id>/', views.product_update_delete, name='product_update_delete'),
+    path('transactions/', views.transactions, name='transactions'),
+]

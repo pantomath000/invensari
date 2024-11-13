@@ -1,0 +1,59 @@
+
+> inventory-frontend@0.1.0 start
+> react-scripts start
+
+(node:4191880) [DEP_WEBPACK_DEV_SERVER_ON_AFTER_SETUP_MIDDLEWARE] DeprecationWarning: 'onAfterSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:4191880) [DEP_WEBPACK_DEV_SERVER_ON_BEFORE_SETUP_MIDDLEWARE] DeprecationWarning: 'onBeforeSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+Starting the development server...
+
+Compiled successfully!
+
+You can now view inventory-frontend in the browser.
+
+  http://localhost:3000
+
+Note that the development build is not optimized.
+To create a production build, use npm run build.
+
+webpack compiled successfully
+Failed to compile.
+
+Module not found: Error: Can't resolve './pages/TransactionsPage' in '/root/inventory-frontend/src'
+ERROR in ./src/App.js 11:0-56
+Module not found: Error: Can't resolve './pages/TransactionsPage' in '/root/inventory-frontend/src'
+
+webpack compiled with 1 error
+Compiling...
+Failed to compile.
+
+[eslint] 
+src/pages/TransactionsPage.js
+  Line 132:60:  'handleEditProduct' is not defined  no-undef
+
+Search for the keywords to learn more about each error.
+WARNING in [eslint] 
+src/pages/TransactionsPage.js
+  Line 2:37:  'updateProduct' is defined but never used               no-unused-vars
+  Line 9:28:  'setEditingProduct' is assigned a value but never used  no-unused-vars
+
+ERROR in [eslint] 
+src/pages/TransactionsPage.js
+  Line 132:60:  'handleEditProduct' is not defined  no-undef
+
+Search for the keywords to learn more about each error.
+
+webpack compiled with 1 error and 1 warning
+[0;33mOne of your dependencies, babel-preset-react-app, is importing the
+"@babel/plugin-proposal-private-property-in-object" package without
+declaring it in its dependencies. This is currently working because
+"@babel/plugin-proposal-private-property-in-object" is already in your
+node_modules folder for unrelated reasons, but it [1mmay break at any time[0;33m.
+
+babel-preset-react-app is part of the create-react-app project, [1mwhich
+is not maintianed anymore[0;33m. It is thus unlikely that this bug will
+ever be fixed. Add "@babel/plugin-proposal-private-property-in-object" to
+your devDependencies to work around this error. This will make this message
+go away.[0m
+  
+Terminated

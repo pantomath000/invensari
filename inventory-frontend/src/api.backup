@@ -1,0 +1,76 @@
+// src/api.js
+import axios from 'axios';
+
+const API_BASE_URL = 'http://localhost:8000/api/';
+
+const api = axios.create({
+  baseURL: API_BASE_URL,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+
+// Login and Token Refresh Functions
+export const login = async (data) => {
+  const response = await api.post('token/', data);
+  localStorage.setItem('access_token', response.data.access);
+  localStorage.setItem('refresh_token', response.data.refresh);
+  api.defaults.headers['Authorization'] = `Bearer ${response.data.access}`;
+  return response;
+};
+
+export const refreshToken = async () => {
+  const refresh_token = localStorage.getItem('refresh_token');
+  const response = await api.post('token/refresh/', { refresh: refresh_token });
+  localStorage.setItem('access_token', response.data.access);
+  api.defaults.headers['Authorization'] = `Bearer ${response.data.access}`;
+  return response;
+};
+
+// Logout Function
+export const logout = () => {
+  localStorage.removeItem('access_token');
+  localStorage.removeItem('refresh_token');
+  delete api.defaults.headers['Authorization'];
+};
+
+// Helper to attach authorization header to requests
+api.interceptors.request.use(
+  async (config) => {
+    const access_token = localStorage.getItem('access_token');
+    if (access_token) {
+      config.headers['Authorization'] = `Bearer ${access_token}`;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
+
+// Automatically refresh token on 401 errors
+api.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    if (error.response.status === 401 && localStorage.getItem('refresh_token')) {
+      try {
+        await refreshToken();
+        return api(error.config);
+      } catch (refreshError) {
+        logout();
+      }
+    }
+    return Promise.reject(error);
+  }
+);
+
+export const fetchDashboardData = () => api.get('dashboard/');
+export const fetchProfile = (userId) => api.get(`profile/${userId}/`);
+export const updateProfile = (userId, data) => api.put(`profile/${userId}/update/`, data);
+export const fetchStockItems = () => api.get('stock/');
+export const addStockItem = (data) => api.post('stock/', data);
+export const updateStockItem = (itemId, data) => api.put(`stock/${itemId}/`, data);
+export const deleteStockItem = (itemId) => api.delete(`stock/${itemId}/`);
+export const fetchProducts = () => api.get('products/');
+export const addProduct = (data) => api.post('products/', data);
+export const updateProduct = (productId, data) => api.put(`products/${productId}/`, data);
+export const deleteProduct = (productId) => api.delete(`products/${productId}/`);
+export const addTransaction = (data) => api.post('transactions/', data);

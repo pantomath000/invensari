@@ -1,0 +1,36 @@
+// src/pages/RegisterPage.js
+import React, { useState } from 'react';
+import { register } from '../api';  // Use `register` instead of `registerUser`
+import { useNavigate } from 'react-router-dom';
+
+function RegisterPage() {
+  const [formData, setFormData] = useState({
+    username: '', email: '', phone_number: '', address: '', password: ''
+  });
+  const navigate = useNavigate();
+
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    try {
+      await register(formData);
+      navigate('/');
+    } catch (error) {
+      alert('Registration failed');
+    }
+  };
+
+  const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  return (
+    <form onSubmit={handleRegister}>
+      <input name="username" onChange={handleChange} placeholder="Username" />
+      <input name="email" type="email" onChange={handleChange} placeholder="Email" />
+      <input name="phone_number" onChange={handleChange} placeholder="Phone Number" />
+      <input name="address" onChange={handleChange} placeholder="Address" />
+      <input name="password" type="password" onChange={handleChange} placeholder="Password" />
+      <button type="submit">Register</button>
+    </form>
+  );
+}
+
+export default RegisterPage;

@@ -1,0 +1,62 @@
+from django.contrib.auth.models import AbstractUser
+from django.db import models
+
+class User(AbstractUser):
+    email = models.EmailField(unique=True)
+    phone_number = models.CharField(max_length=15)
+    address = models.TextField()
+    business_name = models.CharField(max_length=100)
+
+    groups = models.ManyToManyField(
+        'auth.Group',
+        related_name='custom_user_groups',
+        blank=True,
+        help_text='The groups this user belongs to.',
+        verbose_name='groups',
+    )
+    user_permissions = models.ManyToManyField(
+        'auth.Permission',
+        related_name='custom_user_permissions',
+        blank=True,
+        help_text='Specific permissions for this user.',
+        verbose_name='user permissions',
+    )
+
+class StockItem(models.Model):
+    name = models.CharField(max_length=100)
+    quantity = models.FloatField()
+    unit = models.CharField(max_length=10)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='stock_items')
+
+    def __str__(self):
+        return f"{self.name} ({self.quantity} {self.unit})"
+
+class Product(models.Model):
+    name = models.CharField(max_length=100)
+    unit = models.CharField(max_length=10)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='products')
+
+    def __str__(self):
+        return f"{self.name} ({self.unit})"
+
+class ProductIngredient(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='ingredients')
+    stock_item = models.ForeignKey(StockItem, on_delete=models.CASCADE)
+    quantity_required = models.FloatField()
+
+class Transaction(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity_sold = models.FloatField()
+    date = models.DateTimeField(auto_now_add=True)
+
+    def reduce_stock(self):
+        for ingredient in self.product.ingredients.all():
+            required_quantity = ingredient.quantity_required * self.quantity_sold
+            stock_item = ingredient.stock_item
+            if stock_item.quantity >= required_quantity:
+                stock_item.quantity -= required_quantity
+                stock_item.save()
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        self.reduce_stock()

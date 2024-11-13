@@ -1,0 +1,88 @@
+# main/views.py
+
+from rest_framework.views import APIView
+from rest_framework import viewsets, status
+from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated, AllowAny
+from django.contrib.auth import authenticate
+from rest_framework_simplejwt.tokens import RefreshToken
+from .models import User, StockItem, Product, Transaction
+from .serializers import UserSerializer, StockItemSerializer, ProductSerializer, TransactionSerializer
+
+# Register and login views
+class RegisterUserView(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request):
+        serializer = UserSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"message": "Registration successful"}, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class LoginUserView(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request):
+        username = request.data.get('username')
+        password = request.data.get('password')
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            refresh = RefreshToken.for_user(user)
+            return Response({'access': str(refresh.access_token), 'refresh': str(refresh)}, status=status.HTTP_200_OK)
+        return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
+
+# Viewsets for managing stock items, products, and transactions
+class StockItemViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
+    serializer_class = StockItemSerializer
+
+    def get_queryset(self):
+        return StockItem.objects.filter(user=self.request.user)
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+class IngredientViewSet(viewsets.ModelViewSet):
+	permission_classes = [IsAuthenticated]
+	serializer_class = [ProductIngredientSerializer]
+
+    def get_queryset(self):
+        return StockItem.objects.filter(user=self.request.user)
+
+    def perform_create(self, serializer):
+        serializer.save()
+
+class ProductViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
+    serializer_class = ProductSerializer
+
+    def get_queryset(self):
+        return Product.objects.filter(user=self.request.user)
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+class TransactionViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
+    serializer_class = TransactionSerializer
+
+    def get_queryset(self):
+        return Transaction.objects.filter(product__user=self.request.user)
+
+    def perform_create(self, serializer):
+        try:
+            serializer.save()
+        except ValueError as e:
+            return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+class DashboardDataView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        transactions = Transaction.objects.filter(product__user=request.user)
+        data = {
+            "total_sales": transactions.count(),
+            "recent_sales": transactions.values('product__name', 'quantity_sold', 'date')
+        }
+        return Response(data)

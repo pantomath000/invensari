@@ -1,0 +1,39 @@
+from django.contrib.auth.hashers import make_password
+from rest_framework import serializers
+from .models import User, StockItem, Product, ProductIngredient, Transaction
+
+class UserSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(write_only=True)
+
+    class Meta:
+        model = User
+        fields = ['username', 'password', 'email', 'phone_number', 'address', 'business_name']
+
+    def create(self, validated_data):
+        validated_data['password'] = make_password(validated_data['password'])
+        return super().create(validated_data)
+
+class StockItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = StockItem
+        fields = ['id', 'name', 'quantity', 'unit']
+
+class ProductIngredientSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProductIngredient
+        fields = ['product', 'stock_item', 'quantity_required']
+
+class ProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields = ['id', 'name', 'unit']
+
+class TransactionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Transaction
+        fields = ['id', 'product', 'quantity_sold', 'date']
+
+    def create(self, validated_data):
+        transaction = super().create(validated_data)
+        transaction.reduce_stock()
+        return transaction

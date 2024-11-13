@@ -1,0 +1,50 @@
+import React, { useState } from 'react';
+import { Routes, Route, Link } from 'react-router-dom';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
+import Dashboard from './pages/Dashboard';
+import StockPage from './pages/StockPage';
+import TransactionsPage from './pages/TransactionsPage';
+import ProfilePage from './pages/ProfilePage';
+import Notification from './components/Notification';
+import AuthGuard from './components/AuthGuard';
+
+function App() {
+  const [message, setMessage] = useState('');
+
+  const showMessage = (msg) => {
+    setMessage(msg);
+  };
+
+  const clearMessage = () => {
+    setMessage('');
+  };
+
+  return (
+    <div>
+      <Notification message={message} clearMessage={clearMessage} />
+      <nav>
+        <ul>
+          <li><Link to="/dashboard">Dashboard</Link></li>
+          <li><Link to="/stock">Stock</Link></li>
+          <li><Link to="/transactions">Transactions</Link></li>
+          <li><Link to="/profile">Profile</Link></li>
+          <li><Link to="/login">Login</Link></li>
+          <li><Link to="/register">Register</Link></li>
+        </ul>
+      </nav>
+      <Routes>
+        <Route path="/" element={<LoginPage showMessage={showMessage} />} />
+        <Route path="/login" element={<LoginPage showMessage={showMessage} />} />
+        <Route path="/register" element={<RegisterPage showMessage={showMessage} />} />
+
+        <Route path="/dashboard" element={<AuthGuard><Dashboard /></AuthGuard>} />
+        <Route path="/stock" element={<AuthGuard><StockPage showMessage={showMessage} /></AuthGuard>} />
+        <Route path="/transactions" element={<AuthGuard><TransactionsPage showMessage={showMessage} /></AuthGuard>} />
+        <Route path="/profile" element={<AuthGuard><ProfilePage /></AuthGuard>} />
+      </Routes>
+    </div>
+  );
+}
+
+export default App;
