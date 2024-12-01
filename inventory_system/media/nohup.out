@@ -1,0 +1,219 @@
+110.137.36.89 - - [12/Nov/2024 08:27:57] "GET /profile_pictures/IMG-20190302-WA0004.jpg HTTP/1.1" 200 -
+110.137.36.89 - - [12/Nov/2024 08:27:59] code 404, message File not found
+110.137.36.89 - - [12/Nov/2024 08:27:59] "GET /favicon.ico HTTP/1.1" 404 -
+110.137.36.89 - - [12/Nov/2024 08:31:08] "GET /profile_pictures/hahahah.jpg HTTP/1.1" 200 -
+110.137.36.89 - - [12/Nov/2024 08:32:59] "GET /profile_pictures/t_6.png HTTP/1.1" 200 -
+110.137.36.89 - - [12/Nov/2024 08:33:16] "GET /profile_pictures/zquvgn.jpg HTTP/1.1" 200 -
+110.137.36.89 - - [12/Nov/2024 08:33:32] "GET /profile_pictures/hahahah_rG26hTz.jpg HTTP/1.1" 200 -
+110.137.36.89 - - [12/Nov/2024 08:36:28] "GET /profile_pictures/hahahah_rG26hTz.jpg HTTP/1.1" 304 -
+110.137.36.89 - - [12/Nov/2024 08:44:34] "GET /profile_pictures/hahahah_rG26hTz.jpg HTTP/1.1" 304 -
+114.10.103.228 - - [12/Nov/2024 13:23:27] "GET /profile_pictures/hahahah_rG26hTz.jpg HTTP/1.1" 200 -
+114.10.103.228 - - [12/Nov/2024 13:23:52] code 404, message File not found
+114.10.103.228 - - [12/Nov/2024 13:23:52] "GET /favicon.ico HTTP/1.1" 404 -
+110.137.36.89 - - [13/Nov/2024 01:57:18] "GET /profile_pictures/hahahah_rG26hTz.jpg HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 01:57:23] code 404, message File not found
+110.137.36.89 - - [13/Nov/2024 01:57:23] "GET /favicon.ico HTTP/1.1" 404 -
+110.137.36.89 - - [13/Nov/2024 01:57:34] "GET / HTTP/1.1" 200 -
+110.137.36.89 - - [13/Nov/2024 01:58:26] "GET / HTTP/1.1" 200 -
+110.137.36.89 - - [13/Nov/2024 01:58:29] "GET /logoinvensari.png HTTP/1.1" 200 -
+110.137.36.89 - - [13/Nov/2024 02:01:53] "GET /logoinvensari.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 02:03:07] "GET /logoinvensari.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 02:09:39] "GET /logoinvensari.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 02:11:23] "GET /logoinvensari.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 02:17:23] "GET /logoinvensari.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 02:21:30] "GET /logoinvensari.png HTTP/1.1" 200 -
+----------------------------------------
+Exception occurred during processing of request from ('110.137.36.89', 9795)
+Traceback (most recent call last):
+  File "/usr/lib/python3.11/socketserver.py", line 691, in process_request_thread
+    self.finish_request(request, client_address)
+  File "/usr/lib/python3.11/http/server.py", line 1310, in finish_request
+    self.RequestHandlerClass(request, client_address, self,
+  File "/usr/lib/python3.11/http/server.py", line 671, in __init__
+    super().__init__(*args, **kwargs)
+  File "/usr/lib/python3.11/socketserver.py", line 755, in __init__
+    self.handle()
+  File "/usr/lib/python3.11/http/server.py", line 436, in handle
+    self.handle_one_request()
+  File "/usr/lib/python3.11/http/server.py", line 404, in handle_one_request
+    self.raw_requestline = self.rfile.readline(65537)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/socket.py", line 706, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+ConnectionResetError: [Errno 104] Connection reset by peer
+----------------------------------------
+110.137.36.89 - - [13/Nov/2024 02:25:01] "GET /logoinvensari.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 02:32:52] "GET /logoinvensari.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 02:45:28] "GET /transaksi.png HTTP/1.1" 200 -
+110.137.36.89 - - [13/Nov/2024 02:45:28] "GET /stok.png HTTP/1.1" 200 -
+110.137.36.89 - - [13/Nov/2024 02:45:28] "GET /profil.png HTTP/1.1" 200 -
+110.137.36.89 - - [13/Nov/2024 02:48:13] "GET /home.png HTTP/1.1" 200 -
+110.137.36.89 - - [13/Nov/2024 02:48:17] "GET /stok.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 02:48:17] "GET /transaksi.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 02:48:17] "GET /profil.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 03:01:35] "GET /stok.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 03:01:35] "GET /home.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 03:01:35] "GET /profil.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 03:01:35] "GET /transaksi.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 03:06:05] "GET /home.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 03:06:05] "GET /transaksi.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 03:06:05] "GET /stok.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 03:06:05] "GET /profil.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 03:14:20] "GET /home.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 03:14:20] "GET /profil.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 03:14:20] "GET /stok.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 03:14:20] "GET /transaksi.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 03:21:48] "GET /home.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 03:21:48] "GET /stok.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 03:21:48] "GET /profil.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 03:21:48] "GET /transaksi.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 03:27:25] "GET /profil.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 03:27:25] "GET /home.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 03:27:25] "GET /transaksi.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 03:27:25] "GET /stok.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 03:33:01] "GET /stok.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 03:33:01] "GET /home.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 03:33:01] "GET /transaksi.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 03:33:01] "GET /profil.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 03:37:41] "GET /home.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 03:38:59] "GET /stok.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 03:38:59] "GET /transaksi.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 03:38:59] "GET /profil.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 03:44:45] "GET /profile_pictures/hahahah_rG26hTz.jpg HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 04:02:24] "GET /profus.png HTTP/1.1" 200 -
+110.137.36.89 - - [13/Nov/2024 04:02:24] "GET /phonfus.png HTTP/1.1" 200 -
+110.137.36.89 - - [13/Nov/2024 04:02:24] "GET /adfus.png HTTP/1.1" 200 -
+110.137.36.89 - - [13/Nov/2024 04:02:24] "GET /emfus.png HTTP/1.1" 200 -
+110.137.36.89 - - [13/Nov/2024 04:03:23] "GET /home.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 04:03:23] "GET /profil.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 04:03:23] "GET /stok.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 04:03:23] "GET /transaksi.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 04:05:46] "GET /profus.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 04:05:46] "GET /phonfus.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 04:05:46] "GET /emfus.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 04:05:46] "GET /adfus.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 04:11:17] "GET /profus.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 04:11:17] "GET /emfus.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 04:11:17] "GET /phonfus.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 04:11:17] "GET /adfus.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 04:11:17] "GET /home.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 04:11:54] "GET /transaksi.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 04:11:54] "GET /stok.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 04:11:54] "GET /profil.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 04:14:10] "GET /profus.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 04:14:10] "GET /emfus.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 04:14:10] "GET /adfus.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 04:14:10] "GET /phonfus.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 04:16:03] "GET /home.png HTTP/1.1" 200 -
+110.137.36.89 - - [13/Nov/2024 04:16:03] "GET /transaksi.png HTTP/1.1" 200 -
+110.137.36.89 - - [13/Nov/2024 04:16:03] "GET /stok.png HTTP/1.1" 200 -
+110.137.36.89 - - [13/Nov/2024 04:16:03] "GET /profil.png HTTP/1.1" 200 -
+110.137.36.89 - - [13/Nov/2024 04:16:25] "GET /profile_pictures/hahahah_rG26hTz.jpg HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 04:16:29] "GET /profus.png HTTP/1.1" 200 -
+110.137.36.89 - - [13/Nov/2024 04:16:29] "GET /emfus.png HTTP/1.1" 200 -
+110.137.36.89 - - [13/Nov/2024 04:16:29] "GET /adfus.png HTTP/1.1" 200 -
+110.137.36.89 - - [13/Nov/2024 04:16:29] "GET /phonfus.png HTTP/1.1" 200 -
+110.137.36.89 - - [13/Nov/2024 04:16:30] "GET /profile_pictures/hahahah_rG26hTz.jpg HTTP/1.1" 200 -
+110.137.36.89 - - [13/Nov/2024 04:23:49] "GET /profil.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 04:23:49] "GET /transaksi.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 04:23:49] "GET /home.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 04:23:49] "GET /stok.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 04:25:18] "GET /home.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 04:26:23] "GET /profil.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 04:26:23] "GET /stok.png HTTP/1.1" 304 -
+110.137.36.89 - - [13/Nov/2024 04:26:23] "GET /transaksi.png HTTP/1.1" 304 -
+110.137.38.110 - - [19/Nov/2024 05:46:45] "GET /profil.png HTTP/1.1" 200 -
+110.137.38.110 - - [19/Nov/2024 05:46:45] "GET /transaksi.png HTTP/1.1" 200 -
+110.137.38.110 - - [19/Nov/2024 05:46:45] "GET /profus.png HTTP/1.1" 200 -
+110.137.38.110 - - [19/Nov/2024 05:46:45] "GET /emfus.png HTTP/1.1" 200 -
+110.137.38.110 - - [19/Nov/2024 05:46:45] "GET /phonfus.png HTTP/1.1" 200 -
+110.137.38.110 - - [19/Nov/2024 05:46:45] "GET /adfus.png HTTP/1.1" 200 -
+110.137.38.110 - - [19/Nov/2024 05:46:45] "GET /home.png HTTP/1.1" 200 -
+110.137.38.110 - - [19/Nov/2024 05:46:45] "GET /stok.png HTTP/1.1" 200 -
+110.137.38.110 - - [19/Nov/2024 05:46:47] "GET /profile_pictures/hahahah_rG26hTz.jpg HTTP/1.1" 200 -
+110.137.38.110 - - [19/Nov/2024 05:47:07] "GET /home.png HTTP/1.1" 304 -
+110.137.38.110 - - [19/Nov/2024 05:47:07] "GET /transaksi.png HTTP/1.1" 304 -
+110.137.38.110 - - [19/Nov/2024 05:47:07] "GET /stok.png HTTP/1.1" 304 -
+110.137.38.110 - - [19/Nov/2024 05:47:07] "GET /profil.png HTTP/1.1" 304 -
+110.137.38.110 - - [19/Nov/2024 06:07:40] "GET /home.png HTTP/1.1" 304 -
+110.137.38.110 - - [19/Nov/2024 06:07:40] "GET /stok.png HTTP/1.1" 304 -
+110.137.38.110 - - [19/Nov/2024 06:07:40] "GET /transaksi.png HTTP/1.1" 304 -
+110.137.38.110 - - [19/Nov/2024 06:07:40] "GET /profil.png HTTP/1.1" 304 -
+110.137.38.110 - - [19/Nov/2024 06:16:06] "GET /home.png HTTP/1.1" 304 -
+110.137.38.110 - - [19/Nov/2024 06:16:06] "GET /stok.png HTTP/1.1" 304 -
+110.137.38.110 - - [19/Nov/2024 06:16:06] "GET /transaksi.png HTTP/1.1" 304 -
+110.137.38.110 - - [19/Nov/2024 06:16:06] "GET /profil.png HTTP/1.1" 304 -
+110.137.38.110 - - [19/Nov/2024 06:24:12] "GET /home.png HTTP/1.1" 304 -
+110.137.38.110 - - [19/Nov/2024 06:24:12] "GET /stok.png HTTP/1.1" 304 -
+110.137.38.110 - - [19/Nov/2024 06:24:12] "GET /transaksi.png HTTP/1.1" 304 -
+110.137.38.110 - - [19/Nov/2024 06:24:12] "GET /profil.png HTTP/1.1" 304 -
+110.137.38.110 - - [19/Nov/2024 06:31:23] "GET /emfus.png HTTP/1.1" 304 -
+110.137.38.110 - - [19/Nov/2024 06:31:23] "GET /profus.png HTTP/1.1" 304 -
+110.137.38.110 - - [19/Nov/2024 06:31:23] "GET /adfus.png HTTP/1.1" 304 -
+110.137.38.110 - - [19/Nov/2024 06:31:23] "GET /phonfus.png HTTP/1.1" 304 -
+110.137.38.110 - - [19/Nov/2024 06:31:23] "GET /profile_pictures/hahahah_rG26hTz.jpg HTTP/1.1" 304 -
+110.137.38.110 - - [19/Nov/2024 06:49:18] "GET /home.png HTTP/1.1" 304 -
+110.137.38.110 - - [19/Nov/2024 06:49:18] "GET /stok.png HTTP/1.1" 304 -
+110.137.38.110 - - [19/Nov/2024 06:49:18] "GET /transaksi.png HTTP/1.1" 304 -
+110.137.38.110 - - [19/Nov/2024 06:49:18] "GET /profil.png HTTP/1.1" 304 -
+110.137.38.110 - - [19/Nov/2024 07:19:10] "GET /home.png HTTP/1.1" 304 -
+110.137.38.110 - - [19/Nov/2024 07:19:10] "GET /stok.png HTTP/1.1" 304 -
+110.137.38.110 - - [19/Nov/2024 07:19:10] "GET /transaksi.png HTTP/1.1" 304 -
+110.137.38.110 - - [19/Nov/2024 07:19:10] "GET /profil.png HTTP/1.1" 304 -
+110.137.38.110 - - [19/Nov/2024 07:19:12] "GET /profus.png HTTP/1.1" 304 -
+110.137.38.110 - - [19/Nov/2024 07:19:12] "GET /emfus.png HTTP/1.1" 304 -
+110.137.38.110 - - [19/Nov/2024 07:19:12] "GET /phonfus.png HTTP/1.1" 304 -
+110.137.38.110 - - [19/Nov/2024 07:19:12] "GET /adfus.png HTTP/1.1" 304 -
+110.137.38.110 - - [19/Nov/2024 07:19:14] "GET /logoinvensari.png HTTP/1.1" 200 -
+110.137.38.110 - - [19/Nov/2024 07:32:09] "GET /home.png HTTP/1.1" 304 -
+110.137.38.110 - - [19/Nov/2024 07:32:09] "GET /transaksi.png HTTP/1.1" 304 -
+110.137.38.110 - - [19/Nov/2024 07:32:09] "GET /profil.png HTTP/1.1" 304 -
+110.137.38.110 - - [19/Nov/2024 07:32:09] "GET /stok.png HTTP/1.1" 304 -
+110.137.38.110 - - [19/Nov/2024 07:44:05] "GET /home.png HTTP/1.1" 304 -
+110.137.38.110 - - [19/Nov/2024 07:44:05] "GET /stok.png HTTP/1.1" 304 -
+110.137.38.110 - - [19/Nov/2024 07:44:05] "GET /transaksi.png HTTP/1.1" 304 -
+110.137.38.110 - - [19/Nov/2024 07:44:05] "GET /profil.png HTTP/1.1" 304 -
+110.137.38.110 - - [19/Nov/2024 08:01:59] "GET /home.png HTTP/1.1" 304 -
+110.137.38.110 - - [19/Nov/2024 08:01:59] "GET /stok.png HTTP/1.1" 304 -
+110.137.38.110 - - [19/Nov/2024 08:01:59] "GET /transaksi.png HTTP/1.1" 304 -
+110.137.38.110 - - [19/Nov/2024 08:01:59] "GET /profil.png HTTP/1.1" 304 -
+38.114.102.184 - - [19/Nov/2024 08:02:07] "GET /logoinvensari.png HTTP/1.1" 200 -
+110.137.38.110 - - [19/Nov/2024 08:44:40] "GET /home.png HTTP/1.1" 304 -
+110.137.38.110 - - [19/Nov/2024 08:44:40] "GET /stok.png HTTP/1.1" 304 -
+110.137.38.110 - - [19/Nov/2024 08:44:40] "GET /profil.png HTTP/1.1" 304 -
+110.137.38.110 - - [19/Nov/2024 08:44:40] "GET /transaksi.png HTTP/1.1" 304 -
+110.137.38.110 - - [19/Nov/2024 21:45:51] "GET /home.png HTTP/1.1" 304 -
+110.137.38.110 - - [19/Nov/2024 21:45:51] "GET /stok.png HTTP/1.1" 304 -
+110.137.38.110 - - [19/Nov/2024 21:45:51] "GET /transaksi.png HTTP/1.1" 304 -
+110.137.38.110 - - [19/Nov/2024 21:45:51] "GET /profil.png HTTP/1.1" 304 -
+127.0.0.1 - - [24/Nov/2024 18:33:10] "GET / HTTP/1.0" 200 -
+110.137.38.54 - - [24/Nov/2024 18:34:00] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [24/Nov/2024 18:54:59] "GET /profile_pictures/20221231_155402-EFFECTS.jpg HTTP/1.0" 200 -
+127.0.0.1 - - [24/Nov/2024 18:55:15] "GET /profile_pictures/20221231_155402-EFFECTS.jpg HTTP/1.0" 200 -
+110.137.38.54 - - [24/Nov/2024 19:03:36] "GET /home.png HTTP/1.1" 200 -
+110.137.38.54 - - [24/Nov/2024 19:03:36] "GET /transaksi.png HTTP/1.1" 200 -
+110.137.38.54 - - [24/Nov/2024 19:03:36] "GET /stok.png HTTP/1.1" 200 -
+110.137.38.54 - - [24/Nov/2024 19:03:36] "GET /profil.png HTTP/1.1" 200 -
+110.137.38.54 - - [24/Nov/2024 19:03:39] "GET /profus.png HTTP/1.1" 200 -
+110.137.38.54 - - [24/Nov/2024 19:03:39] "GET /emfus.png HTTP/1.1" 200 -
+110.137.38.54 - - [24/Nov/2024 19:03:39] "GET /phonfus.png HTTP/1.1" 200 -
+110.137.38.54 - - [24/Nov/2024 19:03:39] "GET /adfus.png HTTP/1.1" 200 -
+110.137.38.54 - - [24/Nov/2024 19:03:43] "GET /profile_pictures/20221231_155402-EFFECTS.jpg HTTP/1.1" 200 -
+110.137.38.54 - - [24/Nov/2024 19:04:09] "GET /profus.png HTTP/1.1" 304 -
+127.0.0.1 - - [24/Nov/2024 21:05:02] "GET /logoinvensari.png HTTP/1.0" 200 -
+110.137.38.54 - - [24/Nov/2024 21:07:49] "GET / HTTP/1.1" 200 -
+110.137.38.54 - - [24/Nov/2024 21:08:00] "GET /logoinvensari.png HTTP/1.1" 200 -
+127.0.0.1 - - [24/Nov/2024 21:10:54] "GET /logoinvensari.png HTTP/1.0" 304 -
+127.0.0.1 - - [24/Nov/2024 21:15:54] "GET /logoinvensari.png HTTP/1.0" 200 -
+127.0.0.1 - - [24/Nov/2024 21:21:36] "GET /logoinvensari.png HTTP/1.0" 200 -
+127.0.0.1 - - [24/Nov/2024 21:46:44] "GET /logoinvensari.png HTTP/1.0" 304 -
+127.0.0.1 - - [24/Nov/2024 21:46:49] "GET /home.png HTTP/1.0" 200 -
+127.0.0.1 - - [24/Nov/2024 21:46:50] "GET /stok.png HTTP/1.0" 200 -
+127.0.0.1 - - [24/Nov/2024 21:46:50] "GET /transaksi.png HTTP/1.0" 200 -
+127.0.0.1 - - [24/Nov/2024 21:46:50] "GET /profil.png HTTP/1.0" 200 -
+127.0.0.1 - - [24/Nov/2024 21:46:53] "GET /profus.png HTTP/1.0" 200 -
+127.0.0.1 - - [24/Nov/2024 21:46:53] "GET /emfus.png HTTP/1.0" 200 -
+127.0.0.1 - - [24/Nov/2024 21:46:53] "GET /phonfus.png HTTP/1.0" 200 -
+127.0.0.1 - - [24/Nov/2024 21:46:53] "GET /adfus.png HTTP/1.0" 200 -
+127.0.0.1 - - [24/Nov/2024 21:46:53] "GET /profile_pictures/20221231_155402-EFFECTS.jpg HTTP/1.0" 200 -

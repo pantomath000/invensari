@@ -1,0 +1,212 @@
+import React, { useState, useEffect } from 'react';
+import { fetchProducts, addProduct, updateProduct, deleteProduct, addTransaction, fetchStockItems, deleteIngredient } from '../api';
+
+function TransactionsPage({ showMessage }) {
+    const [products, setProducts] = useState([]);
+    const [stockItems, setStockItems] = useState([]);
+    const [newProduct, setNewProduct] = useState({ name: '', unit: '', ingredients: [] });
+    const [newTransaction, setNewTransaction] = useState({ product: '', quantity_sold: '' });
+    const [editingProduct, setEditingProduct] = useState(null);
+
+    useEffect(() => {
+        const loadData = async () => {
+            try {
+                const stockResponse = await fetchStockItems();
+                const productsResponse = await fetchProducts();
+                setStockItems(stockResponse.data);
+                setProducts(productsResponse.data);
+            } catch (error) {
+                showMessage('Failed to load data. Please try again.');
+            }
+        };
+        loadData();
+    }, [showMessage]);
+
+    const handleAddIngredient = () => {
+        setNewProduct({
+            ...newProduct,
+            ingredients: [...newProduct.ingredients, { stock_item: '', quantity_required: '', unit: '' }],
+        });
+    };
+
+    const handleIngredientChange = (index, field, value) => {
+        const ingredients = [...newProduct.ingredients];
+        ingredients[index][field] = value;
+
+        if (field === 'stock_item') {
+            const selectedItem = stockItems.find(item => item.id === parseInt(value));
+            ingredients[index].unit = selectedItem ? selectedItem.unit : '';
+        }
+
+        setNewProduct({ ...newProduct, ingredients });
+    };
+
+    const handleDeleteIngredient = async (identifier) => {
+        if (typeof identifier === 'number') {
+            // For newly added ingredients (without an id), remove by index
+            setNewProduct((prevProduct) => ({
+                ...prevProduct,
+                ingredients: prevProduct.ingredients.filter((_, index) => index !== identifier),
+            }));
+            showMessage("Ingredient removed.");
+        } else {
+            try {
+                await deleteIngredient(identifier);  // Delete by ID for existing ingredients
+                setNewProduct((prevProduct) => ({
+                    ...prevProduct,
+                    ingredients: prevProduct.ingredients.filter((ing) => ing.id !== identifier),
+                }));
+                showMessage("Ingredient deleted successfully.");
+            } catch (error) {
+                showMessage("Failed to delete ingredient. Please try again.");
+            }
+        }
+    };
+
+    const handleAddProduct = async () => {
+        try {
+            if (editingProduct) {
+                // Update existing product
+                const response = await updateProduct(editingProduct.id, newProduct);
+                setProducts(products.map(prod => prod.id === editingProduct.id ? response.data : prod));
+                setEditingProduct(null);
+                showMessage('Product updated successfully.');
+            } else {
+                // Add new product
+                const response = await addProduct(newProduct);
+                setProducts([...products, response.data]);
+                showMessage('Product added successfully.');
+            }
+
+            setNewProduct({ name: '', unit: '', ingredients: [] });  // Clear form after submission
+        } catch (error) {
+            showMessage('Failed to save product. Please try again.');
+        }
+    };
+
+    const handleEditProduct = (product) => {
+        setEditingProduct(product);
+        setNewProduct({ 
+            name: product.name, 
+            unit: product.unit, 
+            ingredients: product.ingredients.map(ingredient => ({
+                id: ingredient.id,  // Ensure ID is included
+                stock_item: ingredient.stock_item,
+                quantity_required: ingredient.quantity_required,
+                unit: stockItems.find(item => item.id === ingredient.stock_item)?.unit || ''
+            }))
+        });
+    };
+
+    const handleDeleteProduct = async (productId) => {
+        try {
+            await deleteProduct(productId);
+            setProducts(products.filter(product => product.id !== productId));
+            showMessage('Product deleted successfully.');
+        } catch (error) {
+            showMessage('Failed to delete product. Please try again.');
+        }
+    };
+
+    const handleAddTransaction = async () => {
+        try {
+            await addTransaction(newTransaction);
+            setNewTransaction({ product: '', quantity_sold: '' });
+            showMessage('Sale recorded successfully.');
+        } catch (error) {
+            showMessage('Failed to record sale. Please try again.');
+        }
+    };
+
+    return (
+        <div>
+            <h1>Transactions Page</h1>
+            
+            {/* Product Creation Section */}
+            <h2>{editingProduct ? 'Edit Product' : 'Add Product'}</h2>
+            <input
+                placeholder="Product Name"
+                value={newProduct.name}
+                onChange={(e) => setNewProduct({ ...newProduct, name: e.target.value })}
+            />
+            <input
+                placeholder="Unit"
+                value={newProduct.unit}
+                onChange={(e) => setNewProduct({ ...newProduct, unit: e.target.value })}
+            />
+            {newProduct.ingredients.map((ingredient, index) => (
+                <div key={index}>
+                    <select
+                        onChange={(e) => handleIngredientChange(index, 'stock_item', e.target.value)}
+                        value={ingredient.stock_item}
+                    >
+                        <option value="">Select Stock Item</option>
+                        {stockItems.map((item) => (
+                            <option key={item.id} value={item.id}>{item.name}</option>
+                        ))}
+                    </select>
+                    <input
+                        type="number"
+                        placeholder="Quantity Required"
+                        value={ingredient.quantity_required}
+                        onChange={(e) => handleIngredientChange(index, 'quantity_required', e.target.value)}
+                    />
+                    <span>{ingredient.unit}</span>
+                    <button onClick={() => handleDeleteIngredient(ingredient.id || index)}>Delete</button>
+                </div>
+            ))}
+            <button onClick={handleAddIngredient}>Add Ingredient</button>
+            {editingProduct ? (
+                <button onClick={handleAddProduct}>Update Product</button>
+            ) : (
+                <button onClick={handleAddProduct}>Add Product</button>
+            )}
+
+            {/* Product Table */}
+            <h2>Product List</h2>
+            {products.length > 0 ? (
+                <table>
+                    <thead>
+                        <tr><th>#</th><th>Name</th><th>Unit</th><th>Actions</th></tr>
+                    </thead>
+                    <tbody>
+                        {products.map((product, index) => (
+                            <tr key={product.id}>
+                                <td>{index + 1}</td>
+                                <td>{product.name}</td>
+                                <td>{product.unit}</td>
+                                <td>
+                                    <button onClick={() => handleEditProduct(product)}>Edit</button>
+                                    <button onClick={() => handleDeleteProduct(product.id)}>Delete</button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            ) : (
+                <p>No products available. Add a product above to see it listed here.</p>
+            )}
+
+            {/* Record Sale Section */}
+            <h2>Record Sale</h2>
+            <select
+                onChange={(e) => setNewTransaction({ ...newTransaction, product: e.target.value })}
+                value={newTransaction.product}
+            >
+                <option value="">Select Product</option>
+                {products.map((product) => (
+                    <option key={product.id} value={product.id}>{product.name}</option>
+                ))}
+            </select>
+            <input
+                type="number"
+                placeholder="Quantity Sold"
+                value={newTransaction.quantity_sold}
+                onChange={(e) => setNewTransaction({ ...newTransaction, quantity_sold: e.target.value })}
+            />
+            <button onClick={handleAddTransaction}>Record Sale</button>
+        </div>
+    );
+}
+
+export default TransactionsPage;

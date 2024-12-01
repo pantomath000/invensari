@@ -1,0 +1,58 @@
+import React, { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import { login } from '../api';
+import { jwtDecode } from "jwt-decode";
+
+function LoginPage({ showMessage }) {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await login({ username, password });
+
+      // Decode the access token to extract user_id
+      const decodedToken = jwtDecode(response.data.access);
+      const userId = decodedToken.user_id;  // Extract user_id from decoded token
+
+      if (userId) {
+        localStorage.setItem('userId', userId);  // Store userId in localStorage
+        localStorage.setItem('access_token', response.data.access);  // Store access token
+        localStorage.setItem('refresh_token', response.data.refresh);  // Store refresh token
+        showMessage('Login successful!');
+        navigate('/dashboard');
+      } else {
+        showMessage('Login failed. User ID not found.');
+      }
+    } catch (error) {
+      showMessage('Login failed. Please check your credentials and try again.');
+    }
+  };
+
+  return (
+    <div>
+      <form onSubmit={handleLogin}>
+        <input 
+          type="text" 
+          value={username} 
+          onChange={(e) => setUsername(e.target.value)} 
+          placeholder="Username" 
+        />
+        <input 
+          type="password" 
+          value={password} 
+          onChange={(e) => setPassword(e.target.value)} 
+          placeholder="Password" 
+        />
+        <button type="submit">Login</button>
+      </form>
+      <div style={{ marginTop: '20px' }}>
+        <span>Don't have an account? <Link to="/register" style={{ color: 'blue', textDecoration: 'underline' }}>Register</Link></span>
+      </div>
+    </div>
+  );
+}
+
+export default LoginPage;
