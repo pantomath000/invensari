@@ -1,7 +1,3 @@
-InvenSari bagus banget
-
-Semoga kelompok 1 dapet A
-
 Steps to deploy:
 
 0. sudo apt update ; sudo apt upgrade -y ; sudo apt install -y nginx python3 python3-pip python3-dj-static python3-venv git curl nodejs npm certbot python3-certbot-nginx build-essential python3-django python3-django-cors-headers python3-djangorestframework python3-djangorestframework-simplejwt python3-pillow gunicorn ; pip3 install django
